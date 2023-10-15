@@ -11,7 +11,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Category List
+                Products List
             </h1>
             <ol class="breadcrumb">
                 <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,7 +32,7 @@
                             <tbody>
                             <tr>
                                 <th style="width: 10px">Id</th>
-                                <th>Parent Category</th>
+                                <th>Category</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Keywords</th>
@@ -44,7 +44,7 @@
                             @foreach($data as $rs)
                                 <tr>
                                     <td>{{$rs->id}}</td>
-                                    <td>{{$rs->parent_Id}}</td>
+                                    <td>{{$rs->category->title}}</td>
                                     <td>{{$rs->title}}</td>
                                     <td>{{$rs->description}}</td>
                                     <td>{{$rs->keywords}}</td>
@@ -56,8 +56,8 @@
                                     @endif
 
 
-                                    <td><a href="{{route('admin.category.edit',['id'=>$rs->id])}}">Edit</a></td>
-                                    <td><a href="{{route('admin.category.destroy',['id'=>$rs->id])}}">Delete</a></td>
+                                    <td><a href="{{route('admin.products.edit',['id'=>$rs->id])}}">Edit</a></td>
+                                    <td><a href="{{route('admin.products.destroy',['id'=>$rs->id])}}">Delete</a></td>
 
 
 

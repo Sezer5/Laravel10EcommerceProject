@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPanel\CategoryController;
+use App\Http\Controllers\AdminPanel\ProductsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminPanel\HomeController as AdminHomeController;
 use Illuminate\Support\Facades\Route;
@@ -24,14 +25,31 @@ Route::get('/test',[HomeController::class,'test'])->name('test');
 //ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES
 //ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES
 //ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES
+Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('/',[AdminHomeController::class,'index'])->name('index');
+    //ADMIN CATEGORY ROUTES ADMIN CATEGORY ROUTES ADMIN CATEGORY ROUTES ADMIN CATEGORY ROUTES
+    Route::prefix('/category')->name('category.')->controller(CategoryController::class)->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::post('/store','store')->name('store');
+        Route::post('/update/{id}','update')->name('update');
+        Route::get('/delete/{id}','delete')->name('destroy');
+        Route::get('/edit/{id}','edit')->name('edit');
+    });
 
-Route::get('/admin',[AdminHomeController::class,'index'])->name('index');
-Route::get('/admin/category',[CategoryController::class,'index'])->name('index');
-Route::get('/admin/category/create',[CategoryController::class,'create'])->name('create');
-Route::post('/admin/category/store',[CategoryController::class,'store'])->name('store');
-Route::post('/admin/category/update/{id}',[CategoryController::class,'update'])->name('update');
-Route::get('/admin/category/delete/{id}',[CategoryController::class,'destroy'])->name('destroy');
-Route::get('/admin/category/edit/{id}',[CategoryController::class,'edit'])->name('edit');
+
+    // ADMIN PRODUCTS CONTROLLER
+
+    Route::prefix('/products')->name('products.')->controller(ProductsController::class)->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/create','create')->name('create');
+        Route::post('/store','store')->name('store');
+        Route::post('/update/{id}','update')->name('update');
+        Route::get('/delete/{id}','destroy')->name('destroy');
+        Route::get('/edit/{id}','edit')->name('edit');
+    });
+});
+
 
 Route::middleware([
     'auth:sanctum',

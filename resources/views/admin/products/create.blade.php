@@ -2,7 +2,7 @@
 
 @extends('layouts.adminbase')
 
-@section('title', 'Category List')
+@section('title', 'Create Product')
 
 @section('content')
 
@@ -25,20 +25,19 @@
 
             <div class="row">
                 <!-- left column -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header">
                             <h3 class="box-title">Quick Example</h3>
                         </div><!-- /.box-header -->
                         <!-- form start -->
-                        <form role="form" action="{{route('admin.category.store')}}" method="post" enctype="multipart/form-data">
+                        <form role="form" action="{{route('admin.products.store')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Parent Category</label>
-                                    <select class="form-control" name="parent_id">
-                                        <option value="0" selected="selected">Main Category</option>
+                                    <label for="exampleInputEmail1">Category</label>
+                                    <select class="form-control" name="category_id">
                                         @foreach($data as $rs)
                                             <option value="{{$rs->id}}">{{$rs->title}}</option>
                                         @endforeach
@@ -57,11 +56,28 @@
                                     <input type="text" name="description" class="form-control" placeholder="Enter description">
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Detail</label>
+                                    <input type="text" name="detail" class="form-control" placeholder="Enter Detail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Price</label>
+                                    <input type="text" name="price" class="form-control" placeholder="Enter Price">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" placeholder="Enter Quantity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Min. Quantity</label>
+                                    <input type="text" name="minquantity" class="form-control" placeholder="Enter Min. Quantity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tax</label>
+                                    <input type="text" name="tax" class="form-control" placeholder="Enter Tax">
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Status</label>
-                                    <select name="status" class="form-control">
-                                        <option value="True">True</option>
-                                        <option value="False">False</option>
-                                    </select>
+                                    <input type="text" name="status" class="form-control" placeholder="Enter Status">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">File input</label>
