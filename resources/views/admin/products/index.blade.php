@@ -40,6 +40,7 @@
                                 <th>Image</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
+                                <th>Gallery</th>
                             </tr>
                             @foreach($data as $rs)
                                 <tr>
@@ -58,6 +59,7 @@
 
                                     <td><a href="{{route('admin.products.edit',['id'=>$rs->id])}}">Edit</a></td>
                                     <td><a href="{{route('admin.products.destroy',['id'=>$rs->id])}}">Delete</a></td>
+                                    <td><a href="{{route('admin.gallery.show',['id'=>$rs->id])}}">Gallery</a></td>
 
 
 
