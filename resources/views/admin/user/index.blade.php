@@ -11,7 +11,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Category List
+                User List
             </h1>
             <ol class="breadcrumb">
                 <li><a href=""><i class="fa fa-dashboard"></i> Home</a></li>
@@ -32,34 +32,40 @@
                             <tbody>
                             <tr>
                                 <th style="width: 10px">Id</th>
-                                <th>Parent Category</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Keywords</th>
-                                <th>Status</th>
-                                <th>Image</th>
+                                <th>Name</th>
+                                <th>E-mail</th>
+                                <th>Roles</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
+                                <th>Roles</th>
+                                <th>Add</th>
                             </tr>
                             @foreach($data as $rs)
                                 <tr>
                                     <td>{{$rs->id}}</td>
-                                    <td>{{ \App\Http\Controllers\AdminPanel\CategoryController::getParentsTree($rs, $rs->title) }}</td>
-                                    <td>{{$rs->title}}</td>
-                                    <td>{!! $rs->description !!}</td>
-                                    <td>{{$rs->keywords}}</td>
-                                    <td>{{$rs->status}}</td>
-
-
-                                    @if($rs->image)
-                                        <td><img src="{{Storage::url($rs->image)}}" style="width:40px;"></td>
-                                    @endif
-
+                                    <td>{{$rs->name}}</td>
+                                    <td>{{$rs->email}}</td>
+                                    <td>
+                                        @foreach($rs->roles as $role)
+                                            {{$role->name}} <a href="{{route('admin.users.destroy_role',['uid'=>$rs->id,'rid'=>$role->id])}}">X</a><br>
+                                        @endforeach
+                                    </td>
 
                                     <td><a href="{{route('admin.category.edit',['id'=>$rs->id])}}">Edit</a></td>
                                     <td><a href="{{route('admin.category.destroy',['id'=>$rs->id])}}">Delete</a></td>
-
-
+                                    <form action="{{route('admin.users.add_role',['id'=>$rs->id])}}" method="post">
+                                        @csrf
+                                        <td>
+                                            <select name="role_id" class="form-control">
+                                                @foreach($data_roles as $ss)
+                                                    <option value="{{$ss->id}}">{{$ss->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button class="btn-success"><i class="fa fa-plus"></i></button>
+                                        </td>
+                                    </form>
 
                                 </tr>
                             @endforeach

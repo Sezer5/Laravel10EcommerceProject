@@ -5,6 +5,7 @@
 @section('title', 'Category List')
 
 @section('content')
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
     <!-- Right side column. Contains the navbar and content of the page -->
     <div class="content-wrapper">
@@ -25,7 +26,7 @@
 
             <div class="row">
                 <!-- left column -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!-- general form elements -->
                     <div class="box box-primary">
                         <div class="box-header">
@@ -54,7 +55,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Descriptions</label>
-                                    <input type="text" name="description" class="form-control" placeholder="Enter description">
+                                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+
+                                    <script>
+                                        ClassicEditor
+                                            .create( document.querySelector( '#description' ) )
+                                            .then( editor => {
+                                                console.log( editor );
+                                            } )
+                                            .catch( error => {
+                                                console.error( error );
+                                            } );
+                                    </script>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Status</label>
