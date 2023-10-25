@@ -20,6 +20,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+
     /**
      * The attributes that are mass assignable.
      *
@@ -61,6 +62,10 @@ class User extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany(Role::class,'role_users');
+    }
+    public function hasRole($role)
+    {
+        return User::where('role', $role)->get();
     }
 
 }

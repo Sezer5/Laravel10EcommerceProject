@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckAdmin
 {
@@ -17,10 +19,24 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
+
+       // dd($request->email);
+//        $mail=$request->email;
+//        $user = User::where('email',$mail) -> get();
+//        foreach ($user as $rs){
+//            foreach ($rs->roles as $role){
+//                if($role->name=='admin'){
+//                    return $next($request);
+//                }
+//            }
+//            return route('login');
+//        }
         $userRoles = Auth::user()->roles->pluck('name');
         If(!$userRoles->contains('admin')){
-            return  redirect(route('admin.login'));
+            return  redirect(route('login'));
         }
         return $next($request);
+
+
     }
 }

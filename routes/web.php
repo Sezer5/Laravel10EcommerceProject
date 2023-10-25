@@ -32,10 +32,12 @@ Route::post('/login_user_check' ,[HomeController::class,'login_user_check'])->na
 //ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES
 //ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES
 //ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES ADMİN PANEL ROUTES
+Route::get('/admin/login',[AdminHomeController::class,'login'])->name('login');
+Route::post('/admin/login_admin',[AdminHomeController::class,'login_admin'])->name('login_admin');
 Route::middleware('admin')->prefix('admin')->name('admin.')->group(function(){
     Route::get('/',[AdminHomeController::class,'index'])->name('index');
-    Route::get('/login',[AdminHomeController::class,'login'])->name('login');
-    Route::post('/login_admin',[AdminHomeController::class,'login_admin'])->name('login_admin');
+
+
     Route::get('/logout',[AdminHomeController::class,'logout'])->name('logout');
     //ADMIN CATEGORY ROUTES ADMIN CATEGORY ROUTES ADMIN CATEGORY ROUTES ADMIN CATEGORY ROUTES
     Route::prefix('/category')->name('category.')->controller(CategoryController::class)->group(function(){

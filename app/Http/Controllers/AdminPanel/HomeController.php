@@ -47,7 +47,7 @@ class HomeController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect(route('admin.login'))->with('loggedout', 'user logged out');
+        return redirect(route('login'))->with('loggedout', 'user logged out');
     }
 
     /**

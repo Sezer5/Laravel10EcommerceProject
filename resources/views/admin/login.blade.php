@@ -37,7 +37,7 @@
                 {{ Session::get( 'loggedout' ) }}
             </div>
         @endif
-        <form action="{{route('admin.login_admin')}}" method="post">
+        <form action="{{route('login_admin')}}" method="post">
             @csrf
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="Email" name="email"/>
